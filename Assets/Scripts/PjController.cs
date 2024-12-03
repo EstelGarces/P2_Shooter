@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class PjController : MonoBehaviour
 {
@@ -154,9 +153,10 @@ public class PjController : MonoBehaviour
 
         if (vidas >= 0)
         {
-            if (other.collider.CompareTag("Proyectil") || other.collider.CompareTag("Pumpkin"))
+            if (other.collider.CompareTag("Proyectil") || other.collider.CompareTag("Pumpkin") || other.collider.CompareTag("Enemy") || other.collider.CompareTag("Demon"))
             {
                 vidas--;
+                Debug.Log("Vidas: " + vidas);
                 Destroy(other.gameObject);
             }
         }
@@ -167,15 +167,12 @@ public class PjController : MonoBehaviour
                 // mobsAnimator.SetBool("Dead", true);
                 Destroy(this.gameObject);
                 SceneManager.LoadScene("EndScene");
-
-
             }
             if (other.collider.CompareTag("Proyectil") || other.collider.CompareTag("Pumpkin"))
             {
                 Destroy(this.gameObject, 1f);
                 //SceneManager.LoadScene("EndScene");
                 StartCoroutine(LostTime());
-
             }
         }
     }
